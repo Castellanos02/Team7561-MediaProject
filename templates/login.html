@@ -1,0 +1,27 @@
+
+<!--Store this code in 'login.html' file inside the 'templates' folder-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Login </title>
+		<link rel="stylesheet" href="../static/style.css">
+	</head>
+	<body>
+		<div class="logincontent" align="center">
+			<div class="logintop">
+                <h1>Login Page</h1>
+			</div></br></br></br></br>
+			<div class="loginbottom">
+			<form action="{{ url_for('returing')}}" method="post" autocomplete="off">
+			<div class="msg">{{ msg }}</div>
+			<input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required></br></br>
+			<input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required></br></br></br>
+			<input type="submit" class="btn" value="Login">
+			</form>
+			</div>
+            <a href="{{ url_for('home') }}"><button>Return</button></a>
+		</div>
+
+
+	</body>
+</html>
