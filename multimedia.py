@@ -8,17 +8,23 @@ import MySQLdb.cursors
 import mysql.connector
 import re
 import os
+import requests, json
+
 app = Flask(__name__)
 
 
 app.secret_key = 'your secret key'
 
-
+search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+payload = {
+    'api_key': 1
+}
 
 
 # Set the MySQL connection parameters using environment variables
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
+#Make sure to change back password
 app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
@@ -93,3 +99,37 @@ def logout():
 
 if __name__ == "__main__":
 	app.run(host="localhost", port=int("5000"))
+
+@app.route('/home_Page')
+def homePage():
+    return render_template('homePage.html')
+
+@app.route('/search_Item')
+def search():
+    try:
+        s = requests.get(search_endpoint, params=payload)
+        data_search = s.json()
+    except:
+        print('Please try again')
+    return render_template('searchByCategory.html', data = data_search)
+
+@app.route('/list_category/<category>')
+def listCategory(category):
+    list_endpoint = f'https://www.themealdb.com/api/json/v1/1/filter.php?c={category}'
+    print(list_endpoint)
+    try:
+        l = requests.get(list_endpoint, params=payload)
+        data_category = l.json()
+    except:
+        print('Please Try Again')
+    return render_template('categoryList.html', data=data_category, category=category)
+
+@app.route('/food_Information/<id>/<category>')
+def foodInfo(id, category):
+    food_endpoint = f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}'
+    try:
+        f = requests.get(food_endpoint, params=payload)
+        data_food = f.json()
+    except:
+        print("Please Try Again")
+    return render_template('specificFood.html', category=category, data=data_food)
