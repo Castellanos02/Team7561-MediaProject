@@ -15,7 +15,8 @@ app = Flask(__name__)
 
 app.secret_key = 'your secret key'
 
-search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+# search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+search_endpoint = 'https://www.themealdb.com/api/json/v1/1/categories.php'
 payload = {
     'api_key': 1
 }
@@ -25,7 +26,7 @@ payload = {
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 #Make sure to change back password
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
 

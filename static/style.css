@@ -86,3 +86,21 @@ html,body{
     padding: 50px 0;
     text-align: center;
   }
+
+  .parent {
+    margin: 1rem;
+    padding: 2rem 2rem;
+    text-align: center;
+  }
+  .child {
+    display: inline-block;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+  }
+
+  nav{
+    padding: 1rem 1rem;
+    background: #1a4b67;
+    width: 50%;
+    margin-left: 25%;
+  }
