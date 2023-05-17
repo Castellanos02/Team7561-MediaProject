@@ -1,0 +1,58 @@
+<!--Store this code in 'login.html' file inside the 'templates' folder-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{{ bootstrap.load_css() }}
+		<title>New User</title>
+		<style>
+			ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #FFFFFF;
+			}
+			li {
+				float: left;
+				border-right: 1px solid #bbb;
+			}
+			li:last-child {
+				border-right: none;
+			}
+			li a {
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+			/* Change the link color to #111 (black) on hover */
+			li a:hover {
+				background-color: #111;
+			}
+			.active {
+				background-color: #04AA6D;
+			}
+		</style>
+	</head>
+	<body>
+		<br><br> 
+		<nav> 
+			<ul>
+				<li style="float:left" ><a class="active" href="{{ url_for('homePage') }}">Home</a></li>
+				<li style="float:left" ><a class="active" href="{{url_for('logout') }}">Logout</a></li>
+				<div class="search-container">
+					<form method="POST" action="/home_Page">
+						{{form.csrf_token}} {{form.user_input.label}}{{form.user_input(size=32)}}
+					  <input type="submit" value="Submit Button"/>
+					</form>
+				  </div>
+				<!-- <li style="float:left" ><a class="active" href="contact.asp">Enter a Recipe</a></li> -->
+				<li style="float:right" ><a class="active" href="{{ url_for('newPage') }}">About</a></li>
+				</ul>
+		</nav>
+		<br><br>
+		<h1>Home Page</h1>
+	
+	</body>
+	</html>
