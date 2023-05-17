@@ -1,35 +1,38 @@
-
-
 <!--Store this code in 'login.html' file inside the 'templates' folder-->
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title> Register </title>
-		<link rel="stylesheet" href="../static/style.css">
-	</head>
-	<body>
-		<div class="page">
-			<div class="container">
-                <!-- <h1>Login Page</h1>
+
+<head>
+	<meta charset="UTF-8">
+	<title> Register </title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+	<div class="page">
+		<div class="container">
+			<!-- <h1>Login Page</h1>
 			</div></br></br></br></br> -->
-            <div class="left">
-                <div class="login">Register!</div>
-                <div class="eula">Welcome! Please Register.</div>
-              </div>
-              <div class="right">
-              <div class="form">
-			<form action="{{ url_for('newUser')}}" method="post" autocomplete="off">
-			<div class="msg">{{ msg }}</div>
-			<input type="text" name="username" placeholder="Enter Your Username" class="textbox" id="username" required></br></br>
-			<input type="password" name="password" placeholder="Enter Your Password" class="textbox" id="password" required></br></br></br>
-			<input type="submit" class="btn" value="Register">
-			</form>
-            <a href="{{ url_for('home') }}"><button>Return</button></a>
+			<div class="left">
+				<div class="login">Register!</div>
+				<div class="eula">Welcome! Please Register.</div>
 			</div>
-        </div>
-    </div>
-</div>
+			<div class="right">
+				<div class="form">
+					<form action="{{ url_for('newUser')}}" method="post" autocomplete="off">
+						<div class="msg">{{ msg }}</div>
+						<input type="text" name="username" placeholder="Enter Your Username" class="textbox"
+							id="username" required></br></br>
+						<input type="password" name="password" placeholder="Enter Your Password" class="textbox"
+							id="password" required></br></br></br>
+						<input type="submit" class="btn" value="Register">
+					</form>
+					<a href="{{ url_for('returing') }}"><button>Already Have Account</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-	</body>
+</body>
+
 </html>
