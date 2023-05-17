@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,31 +10,37 @@
     <link rel="stylesheet" href="/static/style.css">
 
     <style>
-        body{
+        body {
             text-align: center;
         }
-        h2{
-            color:black;
+
+        h2 {
+            color: black;
         }
-        h1{
-            color:black;
+
+        h1 {
+            color: black;
         }
-        h4{
-            color:black;
+
+        h4 {
+            color: black;
         }
-        li{
-            color:black;
+
+        li {
+            color: black;
         }
-        h5{
-            color:black;
+
+        h5 {
+            color: black;
         }
     </style>
 
 </head>
+
 <body>
-    <nav> 
+    <nav>
         <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a> |
-        <a class="btn btn-outline-light" href = "{{ url_for('homePage') }}">Home</a> |
+        <a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home</a> |
         <a href="{{url_for('listCategory', category=category)}}" class="btn btn-outline-light">Return</a>
     </nav>
 
@@ -42,77 +49,79 @@
     <img src="{{data['meals'][0]['strMealThumb']}}" width="300" height="300">
     <br>
     <h2><strong>Food Category:</strong> {{data['meals'][0]['strCategory']}}</h2>
-    <br>
-    <h4><strong>Instructions: </strong>{{data['meals'][0]['strInstructions']}}</h4>
-    <br>
-    
+    <div class="parent">
+        <div class="child" style="float: left; width: 50%;">
+            <h4><strong>Instructions: </strong><br>{{data['meals'][0]['strInstructions']}}</h4>
+        </div>
+        <div class="child" style="float: right; width: 50%;">
+            <h4><strong>Ingredients:</strong></h4>
+            <h5>
+                {% if data['meals'][0]['strIngredient1'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient1'] }}</li>
+                {% endif %}
 
-    <h4><strong>Ingredients:</strong></h4>
-    <h5>
-    {% if data['meals'][0]['strIngredient1']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient1'] }}</li>
-    {% endif %}
-    
-    {% if data['meals'][0]['strIngredient2']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient2'] }}</li>
-    {% endif %}
+                {% if data['meals'][0]['strIngredient2'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient2'] }}</li>
+                {% endif %}
 
-    {% if data['meals'][0]['strIngredient3']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient3'] }}</li>
-    {% endif %}
-    
-    {% if data['meals'][0]['strIngredient4']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient4'] }}</li>
-    {% endif %}    
-    {% if data['meals'][0]['strIngredient5']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient5'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient6']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient6'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient7']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient7'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient8']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient8'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient9']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient9'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient10']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient10'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient11']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient11'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient12']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient12'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient13']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient13'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient14']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient14'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient15']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient15'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient16']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient16'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient17']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient17'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient18']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient18'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient19']  != '' %}
-        <li>{{ data['meals'][0]['strIngredient19'] }}</li>
-    {% endif %}
-    {% if data['meals'][0]['strIngredient20']  != '' %}
-       <li> {{ data['meals'][0]['strIngredient20'] }}</li>
-    {% endif %}
-    </h5>
+                {% if data['meals'][0]['strIngredient3'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient3'] }}</li>
+                {% endif %}
+
+                {% if data['meals'][0]['strIngredient4'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient4'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient5'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient5'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient6'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient6'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient7'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient7'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient8'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient8'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient9'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient9'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient10'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient10'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient11'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient11'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient12'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient12'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient13'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient13'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient14'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient14'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient15'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient15'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient16'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient16'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient17'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient17'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient18'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient18'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient19'] != '' %}
+                <li>{{ data['meals'][0]['strIngredient19'] }}</li>
+                {% endif %}
+                {% if data['meals'][0]['strIngredient20'] != '' %}
+                <li> {{ data['meals'][0]['strIngredient20'] }}</li>
+                {% endif %}
+            </h5>
+        </div>
+    </div>
 
 
 
@@ -121,4 +130,5 @@
 
 
 </body>
+
 </html>

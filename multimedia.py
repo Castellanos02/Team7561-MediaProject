@@ -1,4 +1,16 @@
-# print("Hello")
+"""
+Course: CST205-01_SP23
+Title: Team7561 Final Media Project
+Abstract: This application allows the user to view a list of foods based on the food ccategory they pick. Once the user selects a specific food. The recpie infromation will be displayed based on the food the user selects. 
+Authors: Axel Castellanos, Fabian Santano, Cristobal Elizarraraz, Saul Machuca
+Date: 05/17/2023
+Github Link: https://github.com/Cast02/Team7561-MediaProject
+Citations:
+https://www.w3schools.com/css/css3_gradients.asp
+https://www.themealdb.com/api.php
+https://www.geeksforgeeks.org/login-and-registration-project-using-flask-and-mysql/amp/
+
+"""
 
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
@@ -15,8 +27,8 @@ app = Flask(__name__)
 
 app.secret_key = 'your secret key'
 
-# search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
 search_endpoint = 'https://www.themealdb.com/api/json/v1/1/categories.php'
+random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
 payload = {
     'api_key': 1
 }
@@ -35,7 +47,7 @@ bootstrap = Bootstrap5(app)
 
 
 
-@app.route('/')
+
 def home():
     return render_template('index.html')
 
@@ -43,7 +55,7 @@ def home():
 def newPage():
     return render_template('introPage.html')
 
-@app.route('/returing_User', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def returing():
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -60,7 +72,15 @@ def returing():
             session['username'] = account['username']
             session['password'] = account['password']
             msg = 'Logged in successfully !'
-            return render_template('homePage.html', msg=msg)
+
+
+            try:
+                r = requests.get(random_endpoint, params=payload)
+                data_random = r.json()
+            except:
+                print("please try again")
+            
+            return render_template('homePage.html', msg=msg, data=data_random)
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
@@ -102,8 +122,14 @@ if __name__ == "__main__":
 	app.run(host="localhost", port=int("5000"))
 
 @app.route('/home_Page')
-def homePage():
-    return render_template('homePage.html')
+def homePage():  
+    random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+    try:
+        r = requests.get(random_endpoint, params=payload)
+        data_random = r.json()
+    except:
+        print("please try again")
+    return render_template('homePage.html', data=data_random)
 
 @app.route('/search_Item')
 def search():
