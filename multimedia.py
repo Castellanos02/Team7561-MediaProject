@@ -19,7 +19,9 @@ app.config['SECRET_KEY']='csumb-otter'
 
 app.secret_key = 'your secret key'
 
-search_endpoint = f'https://www.themealdb.com/api/json/v1/1/filter.php?i='
+# search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+search_endpoint = 'https://www.themealdb.com/api/json/v1/1/categories.php'
+search_endpoint1=f'https://www.themealdb.com/api/json/v1/1/filter.php?i='
 payload = {
     'api_key': 1
 }
@@ -32,16 +34,17 @@ app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
+
 mysql = MySQL(app)
 bootstrap = Bootstrap5(app)
 
 class SearchBar(FlaskForm):
     user_input=StringField(
-        'Enter your Ingriedients:'
-        # validators=[DataRequired()]
+        'Enter your Ingriedients:',
+        validators=[DataRequired()]
     )
-
 data_search=None
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -130,8 +133,7 @@ def results():
         return redirect('/home_Page')
     else:
         return render_template('searchByIngriedient.html', data=data_search)
-
-
+    
 def search(user_input):
     global data_search
     try:
