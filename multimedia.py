@@ -16,6 +16,9 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 import MySQLdb.cursors
 import mysql.connector
 import re
@@ -29,6 +32,7 @@ app.secret_key = 'your secret key'
 
 search_endpoint = 'https://www.themealdb.com/api/json/v1/1/categories.php'
 random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+searchBar_link=f'https://www.themealdb.com/api/json/v1/1/filter.php?i='
 payload = {
     'api_key': 1
 }
@@ -38,15 +42,19 @@ payload = {
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 #Make sure to change back password
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
 
 mysql = MySQL(app)
 bootstrap = Bootstrap5(app)
 
-
-
+class SearchBar(FlaskForm):
+    user_input=StringField(
+        'Search By Ingriedient:',
+        validators=[DataRequired()]
+    )
+data_search=None
 
 def home():
     return render_template('index.html')
@@ -121,15 +129,44 @@ def logout():
 if __name__ == "__main__":
 	app.run(host="localhost", port=int("5000"))
 
-@app.route('/home_Page')
-def homePage():  
+@app.route('/home_Page', methods=['GET', 'POST'])
+def homePage():
+    form=SearchBar()
+    global data_search
+    if form.validate_on_submit():
+        lower_case=  form.user_input.data.lower()
+        presearch=lower_case.replace(" ", "_" )
+        searchbar(presearch)
+        print(data_search)
+        return redirect('/results')
+    else:
+        print("form not valid")
+
     random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
     try:
         r = requests.get(random_endpoint, params=payload)
         data_random = r.json()
     except:
         print("please try again")
-    return render_template('homePage.html', data=data_random)
+    return render_template('homePage.html', data=data_random, form=form)
+
+@app.route('/results', methods=['GET','POST'])
+def results():
+    global data_search
+    if data_search==None:
+        return redirect('/home_Page')
+    else:
+        return render_template('searchByIngriedient.html', data=data_search)
+    
+def searchbar(user_input):
+    global data_search
+    try:
+        search_endpoint=searchBar_link+user_input
+        s = requests.get(search_endpoint, params=payload)
+        data_search = s.json()
+        # return data_search
+    except:
+        print('Please try again')
 
 @app.route('/search_Item')
 def search():

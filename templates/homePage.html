@@ -47,6 +47,13 @@
 	<br><br>
 	<nav>
 		<a class="btn btn-outline-light" href="{{ url_for('search') }}">Search By Food Category</a>
+		<div class="search-container"><form method="POST" action="/home_Page">
+			{{form.csrf_token}}
+			{{form.user_input.label}}
+			{{form.user_input(size=32)}}
+			  <input type="submit" value="Search"/>
+			</form>
+		  </div>
 	</nav>
 	<br><br><br><br>
 
