@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ bootstrap.load_css() }}
     <title>List of foods</title>
+    <link rel="stylesheet" href="../static/style.css">
 
     <style>
         body{
@@ -15,13 +16,18 @@
 
 </head>
 <body>
-    <a href="{{url_for('search')}}"><button>Return</button></a>
+    <nav> 
+        <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a> |
+        <a class="btn btn-outline-light" href = "{{ url_for('homePage') }}">Home</a> |
+        <a href="{{url_for('search')}}" class="btn btn-outline-light">Return</a>
+    </nav>
+
     <br><br>
     {% for meals in data['meals']%}
-        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}">{{meals['strMeal']}}</a>
+        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}" class="btn btn-light">{{meals['strMeal']}}</a>
         <br>
         <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}"><img src="{{meals['strMealThumb']}}" width="300" height="200"></a>
-        <br>
+        <br><br>
     {% endfor %}
     {{ bootstrap.load_js() }}
 </body>

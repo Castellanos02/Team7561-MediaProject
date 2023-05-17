@@ -15,7 +15,8 @@ app = Flask(__name__)
 
 app.secret_key = 'your secret key'
 
-search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+# search_endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+search_endpoint = 'https://www.themealdb.com/api/json/v1/1/categories.php'
 payload = {
     'api_key': 1
 }

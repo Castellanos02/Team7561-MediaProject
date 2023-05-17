@@ -9,15 +9,15 @@
 		<meta charset="UTF-8">
 		{{ bootstrap.load_css() }}
 		<title>New User</title>
+		<link rel="stylesheet" href="../static/style.css">
 	</head>
 	<body>
-		<br><br> 
 		<nav> 
 		  <!-- <a class="btn btn-outline-dark" href="{ url_for('home') }">Home </a> -->
 		  <a class="btn btn-outline-dark" href="{{ url_for('logout') }}">Logout</a>
 		  <a class="btn btn-outline-dark" href = "{{ url_for('search') }}">Search For Food</a>
 		</nav>
-		<br><br>
+		<br>
 		<h1>Home Page</h1>
 	
 	</body>
