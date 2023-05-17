@@ -1,0 +1,30 @@
+
+
+
+
+
+<!--Store this code in 'login.html' file inside the 'templates' folder-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		{{ bootstrap.load_css() }}
+		<title>Home Page</title>
+		<link rel="stylesheet" href="../static/style.css">
+	</head>
+	<body>
+		<nav> 
+		  <a class="btn btn-outline-dark" href="{{ url_for('homePage') }}">Home </a>
+		  <a class="btn btn-outline-dark" href="{{ url_for('logout') }}">Logout</a>
+		  <a style="float:right" ><a class="btn btn-outline-dark" href="{{ url_for('newPage') }}">About</a>
+		  <div class="search-container"><form method="POST" action="/home_Page">
+			{{form.csrf_token}} {{form.user_input.label}}{{form.user_input(size=32)}}
+			  <input type="submit" value="Submit Button"/>
+			</form>
+		  </div>
+		  
+		</nav>
+		<br>
+		<h1>Home Page</h1>
+	
+	</body>
+	</html>
