@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results</title>
+    <meta charset="UTF-8">
+	{{ bootstrap.load_css() }}
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<style>
+	h2 {
+		color: black;
+	}
+
+	h1 {
+		color: black;
+	}
+
+	h4 {
+		color: black;
+	}
+
+	li {
+		color: black;
+	}
+
+	h5 {
+		color: black;
+	}
+
+	h3 {
+		color: black;
+	}
+</style>
+<body>
+    <nav>
+		<a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home </a>
+		<a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a>
+		<a class="btn btn-outline-light" href="{{ url_for('newPage') }}">Info Page</a>
+	</nav>
+	<br>
+</body>
+    </h1>{{data}}</h1>
+</html>
