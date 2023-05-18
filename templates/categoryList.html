@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,26 +10,30 @@
     <link rel="stylesheet" href="../static/style.css">
 
     <style>
-        body{
+        body {
             text-align: center;
         }
     </style>
 
 </head>
+
 <body>
-    <nav> 
+    <nav>
         <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a> |
-        <a class="btn btn-outline-light" href = "{{ url_for('homePage') }}">Home</a> |
+        <a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home</a> |
         <a href="{{url_for('search')}}" class="btn btn-outline-light">Return</a>
     </nav>
-
+    <!-- this section of code displays all the food that is under the category the user has chosen -->
     <br><br>
     {% for meals in data['meals']%}
-        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}" class="btn btn-light">{{meals['strMeal']}}</a>
-        <br>
-        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}"><img src="{{meals['strMealThumb']}}" width="300" height="200"></a>
-        <br><br>
+    <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}"
+        class="btn btn-light">{{meals['strMeal']}}</a>
+    <br>
+    <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}"><img src="{{meals['strMealThumb']}}"
+            width="300" height="200"></a>
+    <br><br>
     {% endfor %}
     {{ bootstrap.load_js() }}
 </body>
+
 </html>
