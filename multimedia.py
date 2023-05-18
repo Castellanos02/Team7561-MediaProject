@@ -168,30 +168,39 @@ def searchbar(user_input):
     except:
         print('Please try again')
 
+# Axel Castellanos-Morales
 @app.route('/search_Item')
 def search():
     try:
+        # this request grabs all the food categories the API has to offer
         s = requests.get(search_endpoint, params=payload)
         data_search = s.json()
     except:
         print('Please try again')
     return render_template('searchByCategory.html', data = data_search)
 
+# Axel Castellanos-Morales
 @app.route('/list_category/<category>')
 def listCategory(category):
+    # used an f string to update the endpoint with the category the user selected
     list_endpoint = f'https://www.themealdb.com/api/json/v1/1/filter.php?c={category}'
     print(list_endpoint)
     try:
+        # this request gets all the food that is under the specified food category
         l = requests.get(list_endpoint, params=payload)
         data_category = l.json()
     except:
         print('Please Try Again')
     return render_template('categoryList.html', data=data_category, category=category)
 
+# Axel Castellanos-Morales
 @app.route('/food_Information/<id>/<category>')
 def foodInfo(id, category):
+    # used another f string to update the endpoint witht the id of the specfifc food the user chose
+    # also have category as a pramater so that when the user goes back to the route '/list_category/<category>' the category paramater will have the same 
     food_endpoint = f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}'
     try:
+        # this request gets recipe information about the specific food
         f = requests.get(food_endpoint, params=payload)
         data_food = f.json()
     except:
