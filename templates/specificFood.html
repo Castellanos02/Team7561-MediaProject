@@ -43,7 +43,12 @@
         <a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home</a> |
         <a href="{{url_for('listCategory', category=category)}}" class="btn btn-outline-light">Return</a>
     </nav>
-
+    <h2>Like this recipe? Add it to your favorites </h2>
+    <form method="POST" action="{{ url_for('addIdToDatabase') }}">
+        <input type="hidden" name="meal_id" value="{{ data['meals'][0]['idMeal'] }}">
+        <button type="submit" class="btn btn-light">Save to favorites</button>
+    </form>
+    <br>
     <h1><strong>{{data['meals'][0]['strMeal']}}</strong></h1>
     <br>
     <img src="{{data['meals'][0]['strMealThumb']}}" width="300" height="300">
@@ -60,19 +65,17 @@
                 {% set ingredient_key = 'strIngredient' + x|string %}
                 {% if data['meals'][0][ingredient_key] != '' %}
                 <li> {{ data['meals'][0][ingredient_key] }}</li>
-                
+
                 {% endif %}
-            {% endfor %}
+                {% endfor %}
             </h5>
-        
-        
-        
-            <form method="POST" action="{{ url_for('addIdToDatabase') }}">
-                <input type="hidden" name="meal_id" value="{{ data['meals'][0]['idMeal'] }}">
-                <button type="submit" class="btn btn-light">Add</button>
-            </form>
+
+
+
+
             {{ bootstrap.load_js() }}
-        
-        
-        </body>
-        </html>
+
+
+</body>
+
+</html>
