@@ -52,6 +52,7 @@ app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 mysql = MySQL(app)
 bootstrap = Bootstrap5(app)
 
+#(Cristobal E.)This code creates a flask form for the user to input in asking for the user to input an ingriedient
 class SearchBar(FlaskForm):
     user_input=StringField(
         'Search By Ingriedient:',
@@ -136,9 +137,9 @@ if __name__ == "__main__":
 def homePage():
     form=SearchBar()
     global data_search
-    if form.validate_on_submit():
-        lower_case=  form.user_input.data.lower()
-        presearch=lower_case.replace(" ", "_" )
+    if form.validate_on_submit():#(Cristobal E.)This code validates the form that takes in the users input for the search bar
+        lower_case=  form.user_input.data.lower()#(Cristobal E.)This code forces all input to be lower case letters
+        presearch=lower_case.replace(" ", "_" )#(Cristobal E.)This code replaces any spaces inputed to become _ symbols so it works with the API link
         searchbar(presearch)
         print(data_search)
         return redirect('/results')
@@ -156,11 +157,11 @@ def homePage():
 @app.route('/results', methods=['GET','POST'])
 def results():
     global data_search
-    if data_search==None:
+    if data_search==None:#(Cristobal E.)This if statement checks if the users input is empty and if so just redirects the back to the home page
         return redirect('/home_Page')
-    else:
+    else:#(Cristobal E.)This code will render the results page for the search bar
         return render_template('searchByIngriedient.html', data=data_search)
-    
+#(Cristobal E.)This function performs a search using a search bar input and stores the results in the 'data_search' variable, handling exceptions.
 def searchbar(user_input):
     global data_search
     try:
