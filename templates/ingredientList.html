@@ -24,12 +24,12 @@
 
     <br><br>
     {% for meals in data['meals']%}
-        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}" class="btn btn-light">{{meals['strMeal']}}</a>
+        <a href="{{url_for('foodInfo', id=meals['idMeal'], ingredient=ingredient)}}" class="btn btn-light">{{meals['strMeal']}}</a>
         <br>
-        <a href="{{url_for('foodInfo', id=meals['idMeal'], category=category)}}"><img src="{{meals['strMealThumb']}}" width="300" height="200"></a>
+        <a href="{{url_for('foodInfo', id=meals['idMeal'], ingredient=ingredient)}}"><img src="{{meals['strMealThumb']}}" width="300" height="200"></a>
         <br><br>
     {% endfor %}
-    
+
     {{ bootstrap.load_js() }}
 </body>
 </html>
