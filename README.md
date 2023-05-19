@@ -9,7 +9,7 @@ How to run program:
       pip install mysqlclient
       pip install flask-mysqldb
   Once that is done, use Powershell(windows) or Terminal(mac) to launch flask application by using the line "flask --app multimedia.py --debug run" whiel enviroment is running.
-  Message authors for database key and replace "os.environ.get('MYSQL_PASSWORD')" in line 37 of file "multimedia.py" with the database key.
+  Message authors for database key and replace "os.environ.get('MYSQL_PASSWORD')" in line 48 of file "multimedia.py" with the database key.
   User is then prompted to enter user name or password to enter application or create a new account to enter the application in the future.
   
 Link to GitHub repository: https://github.com/Cast02/Team7561-MediaProject
