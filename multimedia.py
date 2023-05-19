@@ -19,6 +19,9 @@ from flask_mysqldb import MySQL
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 import MySQLdb.cursors
 import mysql.connector
 import re
@@ -42,7 +45,7 @@ payload = {
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 #Make sure to change back password
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
 
@@ -177,7 +180,7 @@ def search():
         data_search = s.json()
     except:
         print('Please try again')
-    return render_template('searchByCategory.html', data = data_search)
+    return render_template('searchByCategory.html', data=data_search)
 
 # Axel Castellanos-Morales
 @app.route('/list_category/<category>')
@@ -193,7 +196,17 @@ def listCategory(category):
         print('Please Try Again')
     return render_template('categoryList.html', data=data_category, category=category)
 
-# Axel Castellanos-Morales
+@app.route('/list_ingredient/<ingredient>')
+def listIngredient(ingredient):
+    list_endpoint = f'https://www.themealdb.com/api/json/v1/1/filter.php?i={ingredient}'
+    print(list_endpoint)
+    try:
+        i = requests.get(list_endpoint, params=payload)
+        data_ingredient = i.json()
+    except:
+        print('Please Try Again')
+    return render_template('ingredientList.html', data=data_ingredient, ingredient=ingredient)
+
 @app.route('/food_Information/<id>/<category>')
 def foodInfo(id, category):
     # used another f string to update the endpoint witht the id of the specfifc food the user chose

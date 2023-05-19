@@ -39,6 +39,134 @@
 		<a class="btn btn-outline-light" href="{{ url_for('newPage') }}">Info Page</a>
 	</nav>
 	<br>
+	
+	
+	<!--{% if data['meals'][0]['strIngredient1'] == data_search %}
+        <li>{{ data['meals'][0]['strIngredient1'] }}</li>
+    {% elif data['meals'][0]['strIngredient2'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient2'] }}</li>
+	{% elif data['meals'][0]['strIngredient3'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient3'] }}</li>
+	{% elif data['meals'][0]['strIngredient4'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient4'] }}</li>
+	{% elif data['meals'][0]['strIngredient5'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient5'] }}</li>
+	{% elif data['meals'][0]['strIngredient6'] == data_search %}
+        <li>{{ data['meals'][0]['strIngredient6'] }}</li>
+    {% elif data['meals'][0]['strIngredient7'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient7'] }}</li>
+	{% elif data['meals'][0]['strIngredient8'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient8'] }}</li>
+	{% elif data['meals'][0]['strIngredient9'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient9'] }}</li>
+	{% elif data['meals'][0]['strIngredient10'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient10'] }}</li>
+	{% elif data['meals'][0]['strIngredient11'] == data_search %}
+        <li>{{ data['meals'][0]['strIngredient11'] }}</li>
+    {% elif data['meals'][0]['strIngredient12'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient12'] }}</li>
+	{% elif data['meals'][0]['strIngredient13'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient13'] }}</li>
+	{% elif data['meals'][0]['strIngredient14'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient14'] }}</li>
+	{% elif data['meals'][0]['strIngredient15'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient15'] }}</li>
+	{% elif data['meals'][0]['strIngredient16'] == data_search %}
+        <li>{{ data['meals'][0]['strIngredient16'] }}</li>
+    {% elif data['meals'][0]['strIngredient17'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient17'] }}</li>
+	{% elif data['meals'][0]['strIngredient18'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient18'] }}</li>
+	{% elif data['meals'][0]['strIngredient19'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient19'] }}</li>
+	{% elif data['meals'][0]['strIngredient20'] == data_search %}
+		<li>{{ data['meals'][0]['strIngredient20'] }}</li>
+	{% else %}
+		<li>No Results</li>
+	{% endif %}-->
+	</br>
+
+	<div class="parent">
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][0]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][0]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][0]['strMeal'])}}"><img src="{{ data['meals'][0]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][1]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][1]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][1]['strMeal'])}}"><img src="{{ data['meals'][1]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][2]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][2]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][2]['strMeal'])}}"><img src="{{ data['meals'][2]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][3]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][3]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][3]['strMeal'])}}"><img src="{{ data['meals'][3]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+    </div>
+
+    <div class="parent">
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][4]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][4]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][4]['strMeal'])}}"><img src="{{ data['meals'][4]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][5]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][5]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][5]['strMeal'])}}"><img src="{{ data['meals'][5]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][6]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][6]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][6]['strMeal'])}}"><img src="{{ data['meals'][6]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][7]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][7]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][7]['strMeal'])}}"><img src="{{ data['meals'][7]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+    </div>
+    
+    <div class="parent">
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][8]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][8]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][8]['strMeal'])}}"><img src="{{ data['meals'][8]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][9]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][9]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][9]['strMeal'])}}"><img src="{{ data['meals'][9]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][10]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][10]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][10]['strMeal'])}}"><img src="{{ data['meals'][10]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][11]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][11]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][11]['strMeal'])}}"><img src="{{ data['meals'][11]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+    </div>
+
+    <div class="parent">
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][12]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][12]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][12]['strMeal'])}}"><img src="{{ data['meals'][12]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+        <div class="child">
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][13]['strMeal'])}}"><button type="button" class="btn btn-light">{{ data['meals'][13]['strMeal'] }}</button></a>
+            <br><br>
+            <a href="{{url_for('listIngredient', ingredient=data['meals'][13]['strMeal'])}}"><img src="{{ data['meals'][13]['strMealThumb'] }}" width="200" height="200"></a>
+        </div>
+    </div>
+
 </body>
-    </h1>{{data}}</h1>
 </html>
