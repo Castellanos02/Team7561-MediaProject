@@ -49,7 +49,6 @@
     <img src="{{data['meals'][0]['strMealThumb']}}" width="300" height="300">
     <br>
     <h2><strong>Food Category:</strong> {{data['meals'][0]['strCategory']}}</h2>
-    <!-- These divs are formatted so the instructions and ingredients in the recipe are side by side, under the food's image and name.  -->
     <div class="parent">
         <div class="child" style="float: left; width: 50%;">
             <h4><strong>Instructions: </strong><br>{{data['meals'][0]['strInstructions']}}</h4>
@@ -57,79 +56,23 @@
         <div class="child" style="float: right; width: 50%;">
             <h4><strong>Ingredients:</strong></h4>
             <h5>
-                {% if data['meals'][0]['strIngredient1'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient1'] }}</li>
+                {% for x in range(1, 21) %}
+                {% set ingredient_key = 'strIngredient' + x|string %}
+                {% if data['meals'][0][ingredient_key] != '' %}
+                <li> {{ data['meals'][0][ingredient_key] }}</li>
+                
                 {% endif %}
-
-                {% if data['meals'][0]['strIngredient2'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient2'] }}</li>
-                {% endif %}
-
-                {% if data['meals'][0]['strIngredient3'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient3'] }}</li>
-                {% endif %}
-
-                {% if data['meals'][0]['strIngredient4'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient4'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient5'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient5'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient6'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient6'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient7'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient7'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient8'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient8'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient9'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient9'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient10'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient10'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient11'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient11'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient12'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient12'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient13'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient13'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient14'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient14'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient15'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient15'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient16'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient16'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient17'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient17'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient18'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient18'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient19'] != '' %}
-                <li>{{ data['meals'][0]['strIngredient19'] }}</li>
-                {% endif %}
-                {% if data['meals'][0]['strIngredient20'] != '' %}
-                <li> {{ data['meals'][0]['strIngredient20'] }}</li>
-                {% endif %}
+            {% endfor %}
             </h5>
-        </div>
-    </div>
-
-
-
-
-    {{ bootstrap.load_js() }}
-
-
-</body>
-
-</html>
+        
+        
+        
+            <form method="POST" action="{{ url_for('addIdToDatabase') }}">
+                <input type="hidden" name="meal_id" value="{{ data['meals'][0]['idMeal'] }}">
+                <button type="submit" class="btn btn-light">Add</button>
+            </form>
+            {{ bootstrap.load_js() }}
+        
+        
+        </body>
+        </html>

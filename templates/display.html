@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+    {{ bootstrap.load_css() }}
+    <title>display</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .parent {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .child {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="btn btn-outline-light" href="{{ url_for('logout') }}">Logout</a> |
+        <a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home</a> |
+        <a class="btn btn-outline-light" href="{{ url_for('search') }}">Search By Food Category</a>
+    </nav>
+    <br>
+	<h1>Welcome!</h1>
+	<h2>These are your saved Recipes:</h2>
+	<br><br>
+
+    {% if account['id1IsEmpty'] == 1 %}
+    <h3><strong>{{ data1['meals'][0]['strMeal'] }}</strong></h3>
+    <img src="{{ data1['meals'][0]['strMealThumb'] }}" width="300" height="300">
+
+    <br>
+    <h2><strong>Food Category:</strong> {{ data1['meals'][0]['strCategory'] }}</h2>
+
+    <div class="parent">
+        <div class="child">
+            <h4><strong>Instructions: </strong><br>{{ data1['meals'][0]['strInstructions'] }}</h4>
+        </div>
+        <div class="child">
+            <h4><strong>Ingredients:</strong></h4>
+            <ul>
+                {% for i in range(1, 21) %}
+                    {% set ingredient = data1['meals'][0]['strIngredient' ~ i] %}
+                    {% if ingredient != '' %}
+                        <li>{{ ingredient }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+   
+    <form method="POST" action="{{ url_for('deleteIdToDatabase') }}">
+        <input type="hidden" name="meal_id" value="{{ data1['meals'][0]['idMeal'] }}">
+        <button type="submit" class="btn btn-light">Delete</button>
+    </form>
+    {% endif %}
+    <br><br><br><br>
+
+    {% if account['id2IsEmpty'] == 1 %}
+    <h3><strong>{{ data2['meals'][0]['strMeal'] }}</strong></h3>
+    <img src="{{ data2['meals'][0]['strMealThumb'] }}" width="300" height="300">
+
+    <br>
+    <h2><strong>Food Category:</strong> {{ data2['meals'][0]['strCategory'] }}</h2>
+
+    <div class="parent">
+        <div class="child">
+            <h4><strong>Instructions: </strong><br>{{ data2['meals'][0]['strInstructions'] }}</h4>
+        </div>
+        <div class="child">
+            <h4><strong>Ingredients:</strong></h4>
+            <ul>
+                {% for i in range(1, 21) %}
+                    {% set ingredient = data2['meals'][0]['strIngredient' ~ i] %}
+                    {% if ingredient != '' %}
+                        <li>{{ ingredient }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+    
+
+    <form method="POST" action="{{ url_for('deleteIdToDatabase') }}">
+        <input type="hidden" name="meal_id" value="{{ data2['meals'][0]['idMeal'] }}">
+        <button type="submit" class="btn btn-light">Delete</button>
+    </form>
+    {% endif %}
+
+    <br><br><br><br>
+
+    {% if account['id3IsEmpty'] == 1 %}
+    <h3><strong>{{ data3['meals'][0]['strMeal'] }}</strong></h3>
+    <img src="{{ data3['meals'][0]['strMealThumb'] }}" width="300" height="300">
+
+    <br>
+    <h2><strong>Food Category:</strong> {{ data3['meals'][0]['strCategory'] }}</h2>
+
+    <div class="parent">
+        <div class="child">
+            <h4><strong>Instructions: </strong><br>{{ data3['meals'][0]['strInstructions'] }}</h4>
+        </div>
+        <div class="child">
+            <h4><strong>Ingredients:</strong></h4>
+            <ul>
+                {% for i in range(1, 21) %}
+                    {% set ingredient = data3['meals'][0]['strIngredient' ~ i] %}
+                    {% if ingredient != '' %}
+                        <li>{{ ingredient }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+    
+    <form method="POST" action="{{ url_for('deleteIdToDatabase') }}">
+        <input type="hidden" name="meal_id" value="{{ data3['meals'][0]['idMeal'] }}">
+        <button type="submit" class="btn btn-light">Delete</button>
+    </form>
+    {% endif %}
+    <br><br><br><br>
+
+</body>
+</html>
