@@ -16,6 +16,6 @@ Link to GitHub repository: https://github.com/Cast02/Team7561-MediaProject
 Link to Trello board: https://trello.com/invite/b/DjCLNQQ3/ATTI2f60a3b4f15e3dccaab21b77628396e3AD4B8D4B/team-7561
 Link to Google Slide: https://docs.google.com/presentation/d/1p7tiiShO9ufQNlvP_OcEEHIZF6zyUVX5FKC-P5y9Hac/edit?usp=sharing
 Future work:
-   Add better CSS
+   Add better CSS.
    Add a save recipe feature, where users can save their favorite recipes.
-   Add a create recipe feature, where users can create their own recipes and they will be saved under their account
+   Add a create recipe feature, where users can create their own recipes and they will be saved under their account.
