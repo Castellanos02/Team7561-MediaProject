@@ -43,11 +43,13 @@
   <nav>
     <!-- <a class="btn btn-outline-dark" href="{ url_for('home') }">Home </a> -->
     <a class="btn btn-outline-light" href="{{ url_for('returing') }}">Login</a>
-    
+    <a class="btn btn-outline-light" href="{{ url_for('homePage') }}">Home Page</a>
+
   </nav>
   <br>
   <h1>Welcome to our site!</h1>
-  <h2>In our application you will be able to search up recipes by different food categories.<br>For example:<br></h2>
+  <h2>In our application you will be able to search up recipes by different food categories or different
+    ingredients.<br>For example here is a few food catergories:<br></h2>
   <img src="static/images/categoryExample.png" width="50%" height="50%">
   <br>
   <h2>Once you click on a food category a list of foods will be displayed. <br>Click on one that intrests you!</h2><br>
@@ -56,6 +58,16 @@
   <h2>After clicking on a food. Information about that specfic food will be displayed.</h2><br>
   <img src="static/images/foodInfo.png" width="50%" height="50%">
   <br><br>
+  <h2>If you like the recipe, click the button that says "Save to favorites".</h2><br>
+  <img src="static/images/favoritesButton.png" width="50%" height="50%">
+  <br><br>
+  <h2>It will be added to your favorites page
+    which can be accessed at the top of the home page by clicking the button "Favorite Recipes".</h2><br>
+  <img src="static/images/favoritesList.png" width="50%" height="50%">
+  <br><br>
+  <h2>If you don't like the recipe anymore just click the "delete" button at the bottom of the recipe in the favorites
+    page.</h2>
+  <img src="static/images/deleteRecipe.png" width="50%" height="50%">
 </body>
 
 </html>

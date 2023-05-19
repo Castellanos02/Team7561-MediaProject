@@ -45,7 +45,7 @@ payload = {
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 #Make sure to change back password
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
 
