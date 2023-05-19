@@ -45,7 +45,7 @@ payload = {
 app.config['MYSQL_HOST'] = 'x71wqc4m22j8e3ql.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
 app.config['MYSQL_USER'] = 'u8e89rp1uw4nc5kn'
 #Make sure to change back password
-app.config['MYSQL_PASSWORD'] = 'jdgri1ekfyi5afb3'
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
 app.config['MYSQL_DB'] = 'fnfuowcdv3411fa1'
 
 
@@ -67,9 +67,13 @@ def home():
 def newPage():
     return render_template('introPage.html')
 
+#Fabian
+#This is the loggin page , used flask-forms , flask mysql and flask sessions to verify username is
+# unique and not already in the database if successful you will be rendered into home page
 @app.route('/', methods=['GET', 'POST'])
 def returing():
     msg = ''
+    form=SearchBar()
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password'] 
@@ -92,13 +96,13 @@ def returing():
             except:
                 print("please try again")
             
-            return render_template('homePage.html', msg=msg, data=data_random)
+            return render_template('homePage.html', msg=msg, data=data_random ,form = form)
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
 
-
-#Sign up Page
+#Fabian
+#Sign up Page Uses same features as loggin but this time we check and make sure the passowrd and username match anything in our dataBase 
 @app.route('/create_User', methods=['GET', 'POST'])
 def newUser():
     msg = ''
@@ -110,10 +114,10 @@ def newUser():
         account = cursor.fetchone()
         if account:
             msg = 'Account already exists!'
-        # elif not re.match(r'[A-Za-z0-9]+', username):
-        #     msg = 'Name must contain only characters and numbers!'
         else:
             cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s)', (username, password,))
+            mysql.connection.commit()
+            cursor.execute('INSERT INTO accountrecipes VALUES (%s, %s, %s,%s,%s,%s,%s)', (username, "0","0","0",0,0,0))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
             return redirect(url_for('newPage'))
@@ -121,7 +125,7 @@ def newUser():
         msg = 'Please fill out the form!'
     return render_template('createAccount.html', msg=msg)
 
-
+#Fabian Simple Logout button
 @app.route('/logout')
 def logout():
 	session.pop('loggedin', None)
@@ -130,8 +134,6 @@ def logout():
 	return redirect(url_for('returing'))
 
 
-if __name__ == "__main__":
-	app.run(host="localhost", port=int("5000"))
 
 @app.route('/home_Page', methods=['GET', 'POST'])
 def homePage():
@@ -220,3 +222,151 @@ def foodInfo(id, category):
     except:
         print("Please Try Again")
     return render_template('specificFood.html', category=category, data=data_food)
+
+#Fabian , loops though all saved recipes in the users database to match the delted mealID 
+# then we set the ifIdIsEmpty to 0 indicatating we can overwrite this. 
+@app.route('/delete-id', methods=['POST'])
+def deleteIdToDatabase():
+    form=SearchBar()
+    global isEmpty1
+    global isEmpty2 
+    global isEmpty3
+    msg = ''
+    username = session.get('username')
+    emptyMealID = 0
+    meal_id = request.form.get('meal_id')
+    recipeSQL = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    recipeSQL.execute(
+            'SELECT * FROM accountrecipes WHERE username = % s', (username, ))
+    account = recipeSQL.fetchone()
+
+    if account['mealID1'] == meal_id:
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE accountrecipes SET id1IsEmpty = %s WHERE username = %s', (0, username))
+        mysql.connection.commit()
+        msg = 'You have deleted successfully!'
+        random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+        isEmpty1 = 0
+        try:
+            r = requests.get(random_endpoint, params=payload)
+            data_random = r.json()
+        except:
+            print("please try again")
+        return render_template('homePage.html', data=data_random , form = form )
+
+    if account['mealID2'] == meal_id:
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE accountrecipes SET id2IsEmpty = %s WHERE username = %s', (0, username))
+        mysql.connection.commit()
+        msg = 'You have deleted successfully!'
+        random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+        isEmpty2 = 0
+        try:
+            r = requests.get(random_endpoint, params=payload)
+            data_random = r.json()
+        except:
+            print("please try again")
+        return render_template('homePage.html', data=data_random , form = form )
+
+    if account['mealID3'] == meal_id:
+        cursor = mysql.connection.cursor()
+        cursor.execute('UPDATE accountrecipes SET id3IsEmpty = %s WHERE username = %s', (0, username))
+        mysql.connection.commit()
+        msg = 'You have deleted successfully!'
+        random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+        try:
+            r = requests.get(random_endpoint, params=payload)
+            data_random = r.json()
+        except:
+            print("please try again")
+        return render_template('homePage.html', data=data_random , form = form )
+        
+
+#Fabian Uses a form and button to add the mealId to the users database so they can later view the recipe
+#Updates an empty mealid to the form meal id and then updates theIsEmpty to 1 indicating its full and in use.
+@app.route('/add-id', methods=['POST'])
+def addIdToDatabase():
+    form=SearchBar()
+    msg = ''
+    emptyMealID = 0
+    username = session.get('username')
+    meal_id = request.form.get('meal_id')
+
+
+
+
+    recipeSQL = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    recipeSQL.execute(
+            'SELECT * FROM accountrecipes WHERE username = % s', (username, ))
+    account = recipeSQL.fetchone()
+    if account["id1IsEmpty"]== 0:
+        emptyMealID=1
+    elif account["id2IsEmpty"]== 0:
+        emptyMealID=2
+    elif account["id3IsEmpty"]== 0:
+        emptyMealID=3
+    
+    if emptyMealID == 0:
+        return render_template('homePage.html', data=data_random)
+
+    else:
+        recipeSQLUpdate = mysql.connection.cursor()
+        query = "UPDATE accountrecipes SET mealID{} = %s WHERE username = %s".format(emptyMealID)
+        values = (meal_id, username)
+        recipeSQLUpdate.execute(query, values)
+        mysql.connection.commit()
+        recipeSQLUpdate = mysql.connection.cursor()
+        query = "UPDATE accountrecipes SET id{}IsEmpty = %s WHERE username = %s".format(emptyMealID)
+        values = (1, username)
+        recipeSQLUpdate.execute(query, values)
+        mysql.connection.commit()
+        msg = 'You have added successfully!'
+        random_endpoint = "https://www.themealdb.com/api/json/v1/1/random.php"
+        try:
+            r = requests.get(random_endpoint, params=payload)
+            data_random = r.json()
+        except:
+            print("please try again")
+        return render_template('homePage.html', data=data_random , form = form)
+
+#Fabian Displays all saved recipes from users database
+@app.route("/displayInfo")
+def display():
+    meal_id = request.form.get('meal_id')
+    emptyMealID = 0
+    global isEmpty1
+    global isEmpty2
+    global isEmpty3
+    
+    if 'loggedin' in session:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM accountrecipes WHERE username = % s',
+                       (session['username'], ))
+        account = cursor.fetchone()
+        id1 = account['mealID1']
+        id2 = account['mealID2']
+        id3 = account['mealID3']
+        if account['id1IsEmpty'] == 0:
+            isEmpty1=1
+        if account['id2IsEmpty'] == 0:
+            isEmpty2=1
+        if account['id3IsEmpty'] == 0:
+            isEmpty3=1
+            
+        food_endpoint1 = f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id1}'
+        food_endpoint2 = f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id2}'
+        food_endpoint3 = f'https://www.themealdb.com/api/json/v1/1/lookup.php?i={id3}'
+
+        
+        f1 = requests.get(food_endpoint1, params=payload)
+        f2 = requests.get(food_endpoint2, params=payload)
+        f3 = requests.get(food_endpoint3, params=payload)
+        data_food1 = f1.json()
+        data_food2 = f2.json()
+        data_food3 = f3.json()
+        if account['mealID1'] != "" or account['mealID2'] != "" or account['mealID3'] != "":
+            return render_template("display.html", account=account,data1=data_food1,data2=data_food2,data3=data_food3 )
+    return redirect(url_for('returing'))
+
+    if __name__ == "__main__":
+	    app.run(host="localhost", port=int("5000"))
